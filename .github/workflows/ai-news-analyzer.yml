@@ -47,6 +47,21 @@ jobs:
         run: |
           mkdir -p skills/ai-news-analyzer/reports
 
+      - name: 验证环境变量
+        run: |
+          echo "检查环境变量配置..."
+          if [ -z "${{ secrets.TIANAPI_KEY }}" ]; then
+            echo "❌ 错误: TIANAPI_KEY 未设置"
+            echo "请在 GitHub Secrets 中添加 TIANAPI_KEY"
+            exit 1
+          fi
+          if [ -z "${{ secrets.ZHIPU_API_KEY }}" ]; then
+            echo "❌ 错误: ZHIPU_API_KEY 未设置"
+            echo "请在 GitHub Secrets 中添加 ZHIPU_API_KEY"
+            exit 1
+          fi
+          echo "✅ 所有必需的环境变量都已设置"
+
       - name: 运行 AI 新闻分析（智谱 GLM-4.7）
         env:
           TIANAPI_KEY: ${{ secrets.TIANAPI_KEY }}
@@ -75,7 +90,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add skills/ai-news-analyzer/reports/*.html
+          # 使用 -f 强制添加被 .gitignore 忽略的 HTML 报告文件
+          git add -f skills/ai-news-analyzer/reports/*.html
           git diff --staged --quiet || git commit -m "🤖 AI News Report - $(date +'%Y-%m-%d')"
           git push
 
