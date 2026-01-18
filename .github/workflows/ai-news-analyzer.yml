@@ -1,0 +1,240 @@
+name: AI News Analyzer
+
+on:
+  # 定时执行：每天北京时间 9:00 (UTC 1:00)
+  schedule:
+    - cron: '0 1 * * *'
+
+  # 支持手动触发
+  workflow_dispatch:
+    inputs:
+      max_topics:
+        description: '最大分析话题数'
+        required: false
+        default: '20'
+        type: choice
+        options:
+          - 10
+          - 20
+          - 30
+          - 50
+
+# 权限配置
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# 并发控制
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  analyze-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: |
+          npm install
+
+      - name: 创建配置文件
+        env:
+          TIANAPI_KEY: ${{ secrets.TIANAPI_KEY }}
+          TIANAPI_ENDPOINT: ${{ secrets.TIANAPI_ENDPOINT }}
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          MAX_TOPICS: ${{ github.event.inputs.max_topics || '20' }}
+        run: |
+          # 创建临时配置文件
+          cat > skills/ai-news-analyzer/api-config.json << EOF
+          {
+            "apiEndpoint": "${TIANAPI_ENDPOINT:-https://apis.tianapi.com/ai/index}",
+            "apiKey": "${TIANAPI_KEY}",
+            "apiName": "TianAPI",
+            "apiTimeout": 30000,
+            "sources": ["天行数据", "AI资讯"],
+            "categories": [
+              "artificial-intelligence",
+              "machine-learning",
+              "deep-learning",
+              "large-language-models",
+              "computer-vision",
+              "natural-language-processing",
+              "generative-ai",
+              "neural-networks"
+            ],
+            "keywords": [
+              "AI", "artificial intelligence", "machine learning",
+              "deep learning", "LLM", "GPT", "ChatGPT", "Claude",
+              "transformer", "neural network", "computer vision",
+              "NLP", "generative AI", "AGI", "diffusion model",
+              "reinforcement learning"
+            ],
+            "maxTopics": ${MAX_TOPICS},
+            "dateRangeDays": 7,
+            "scoring": {
+              "interestingness": {
+                "breakthrough": { "min": 70, "max": 80, "label": "突破性创新" },
+                "significant": { "min": 60, "max": 69, "label": "重大进展" },
+                "notable": { "min": 50, "max": 59, "label": "显著更新" },
+                "routine": { "min": 30, "max": 49, "label": "常规新闻" }
+              },
+              "usefulness": {
+                "highly_actionable": { "min": 18, "max": 20, "label": "高度可执行" },
+                "valuable": { "min": 15, "max": 17, "label": "有价值" },
+                "informative": { "min": 10, "max": 14, "label": "信息丰富" },
+                "limited": { "min": 5, "max": 9, "label": "有限效用" }
+              }
+            },
+            "reportSettings": {
+              "excellentThreshold": 80,
+              "goodThreshold": 60,
+              "includeTimeline": true,
+              "includeProductDetails": true,
+              "includeSources": true,
+              "maxSourcesPerTopic": 5
+            },
+            "webSearch": {
+              "enabled": true,
+              "resultsPerTopic": 5,
+              "delayBetweenRequests": 1000
+            }
+          }
+          EOF
+
+      - name: 运行 AI 新闻分析（智谱 GLM-4.7）
+        env:
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+        run: |
+          node .github/scripts/ai-news-analyzer-zhipu.js
+
+      - name: 生成 HTML 报告
+        run: |
+          node skills/ai-news-analyzer/get-daily-news.js
+
+      - name: 上传报告到 Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-news-report-${{ github.run_number }}
+          path: skills/ai-news-analyzer/reports/*.html
+          retention-days: 30
+
+      - name: 提交报告到仓库
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add skills/ai-news-analyzer/reports/*.html
+          git diff --staged --quiet || git commit -m "🤖 AI News Report - $(date +'%Y-%m-%d')"
+          git push
+
+      - name: 创建 GitHub Release
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG_NAME="report-$(date +'%Y-%m-%d')"
+          RELEASE_NAME="AI News Report - $(date +'%Y-%m-%d')"
+
+          # 检查 tag 是否已存在
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Tag $TAG_NAME already exists, skipping release creation"
+            exit 0
+          fi
+
+          # 获取最新的 HTML 报告
+          LATEST_REPORT=$(ls -t skills/ai-news-analyzer/reports/*.html | head -1)
+
+          # 创建 tag
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
+
+          # 创建 release 并上传报告
+          gh release create "$TAG_NAME" \
+            --title "$RELEASE_NAME" \
+            --notes "Automated AI News Analysis Report generated on $(date +'%Y-%m-%d')" \
+            "$LATEST_REPORT"
+
+  # 可选：部署到 GitHub Pages
+  deploy-pages:
+    if: success()
+    needs: analyze-news
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout 代码
+        uses: actions/checkout@v4
+
+      - name: 下载所有 reports
+        uses: actions/download-artifact@v4
+        with:
+          path: skills/ai-news-analyzer/reports
+
+      - name: 设置 Pages
+        uses: actions/configure-pages@v4
+
+      - name: 创建 Pages 站点
+        run: |
+          mkdir -p pages
+          cp skills/ai-news-analyzer/reports/*/*.html pages/ || true
+
+          # 创建索引页
+          cat > pages/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="zh-CN">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>AI News Reports</title>
+              <style>
+                  body { font-family: system-ui, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+                  .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px; }
+                  .header h1 { margin: 0; }
+                  .report-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+                  .report-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s; }
+                  .report-card:hover { transform: translateY(-5px); }
+                  .report-date { font-size: 0.9em; color: #666; margin-bottom: 10px; }
+                  .report-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 8px; }
+                  .report-link:hover { background: #764ba2; }
+              </style>
+          </head>
+          <body>
+              <div class="header">
+                  <h1>🤖 AI News Analysis Reports</h1>
+                  <p>Powered by Zhipu GLM-4.7</p>
+              </div>
+              <div class="report-grid">
+                  $(find skills/ai-news-analyzer/reports -name "*.html" -type f | sort -r | head -20 | while read file; do
+                      filename=$(basename "$file")
+                      date=$(echo "$filename" | grep -oP '\d{4}-\d{2}-\d{2}' || echo "Unknown Date")
+                      echo "<div class='report-card'>"
+                      echo "<div class='report-date'>📅 $date</div>"
+                      echo "<h3>AI News Report</h3>"
+                      echo "<a href='$filename' class='report-link'>View Report</a>"
+                      echo "</div>"
+                  done)
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: 上传到 Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages
+
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
