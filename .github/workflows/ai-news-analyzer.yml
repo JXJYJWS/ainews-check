@@ -22,13 +22,9 @@ on:
 # 权限配置
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
-# 并发控制
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+# 注释：Pages 部署已禁用，因为报告已通过 Artifacts、Git 提交和 Releases 提供访问
+# 如需启用 Pages，请确保在仓库设置中正确配置 GitHub Pages
 
 jobs:
   analyze-news:
@@ -121,78 +117,3 @@ jobs:
             --title "$RELEASE_NAME" \
             --notes "Automated AI News Analysis Report generated on $(date +'%Y-%m-%d')" \
             "$LATEST_REPORT"
-
-  # 可选：部署到 GitHub Pages
-  deploy-pages:
-    if: success()
-    needs: analyze-news
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Checkout 代码
-        uses: actions/checkout@v4
-
-      - name: 下载所有 reports
-        uses: actions/download-artifact@v4
-        with:
-          path: skills/ai-news-analyzer/reports
-
-      - name: 设置 Pages
-        uses: actions/configure-pages@v4
-
-      - name: 创建 Pages 站点
-        run: |
-          mkdir -p pages
-          cp skills/ai-news-analyzer/reports/*/*.html pages/ || true
-
-          # 创建索引页
-          cat > pages/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html lang="zh-CN">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>AI News Reports</title>
-              <style>
-                  body { font-family: system-ui, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
-                  .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px; }
-                  .header h1 { margin: 0; }
-                  .report-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-                  .report-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s; }
-                  .report-card:hover { transform: translateY(-5px); }
-                  .report-date { font-size: 0.9em; color: #666; margin-bottom: 10px; }
-                  .report-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 8px; }
-                  .report-link:hover { background: #764ba2; }
-              </style>
-          </head>
-          <body>
-              <div class="header">
-                  <h1>🤖 AI News Analysis Reports</h1>
-                  <p>Powered by Zhipu GLM-4.7</p>
-              </div>
-              <div class="report-grid">
-                  $(find skills/ai-news-analyzer/reports -name "*.html" -type f | sort -r | head -20 | while read file; do
-                      filename=$(basename "$file")
-                      date=$(echo "$filename" | grep -oP '\d{4}-\d{2}-\d{2}' || echo "Unknown Date")
-                      echo "<div class='report-card'>"
-                      echo "<div class='report-date'>📅 $date</div>"
-                      echo "<h3>AI News Report</h3>"
-                      echo "<a href='$filename' class='report-link'>View Report</a>"
-                      echo "</div>"
-                  done)
-              </div>
-          </body>
-          </html>
-          EOF
-
-      - name: 上传到 Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: pages
-
-      - name: 部署到 GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
