@@ -43,77 +43,24 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 创建配置文件
-        env:
-          TIANAPI_KEY: ${{ secrets.TIANAPI_KEY }}
-          TIANAPI_ENDPOINT: ${{ secrets.TIANAPI_ENDPOINT }}
-          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
-          MAX_TOPICS: ${{ github.event.inputs.max_topics || '20' }}
+      - name: 创建 reports 目录
         run: |
-          # 创建临时配置文件
-          cat > skills/ai-news-analyzer/api-config.json << EOF
-          {
-            "apiEndpoint": "${TIANAPI_ENDPOINT:-https://apis.tianapi.com/ai/index}",
-            "apiKey": "${TIANAPI_KEY}",
-            "apiName": "TianAPI",
-            "apiTimeout": 30000,
-            "sources": ["天行数据", "AI资讯"],
-            "categories": [
-              "artificial-intelligence",
-              "machine-learning",
-              "deep-learning",
-              "large-language-models",
-              "computer-vision",
-              "natural-language-processing",
-              "generative-ai",
-              "neural-networks"
-            ],
-            "keywords": [
-              "AI", "artificial intelligence", "machine learning",
-              "deep learning", "LLM", "GPT", "ChatGPT", "Claude",
-              "transformer", "neural network", "computer vision",
-              "NLP", "generative AI", "AGI", "diffusion model",
-              "reinforcement learning"
-            ],
-            "maxTopics": ${MAX_TOPICS},
-            "dateRangeDays": 7,
-            "scoring": {
-              "interestingness": {
-                "breakthrough": { "min": 70, "max": 80, "label": "突破性创新" },
-                "significant": { "min": 60, "max": 69, "label": "重大进展" },
-                "notable": { "min": 50, "max": 59, "label": "显著更新" },
-                "routine": { "min": 30, "max": 49, "label": "常规新闻" }
-              },
-              "usefulness": {
-                "highly_actionable": { "min": 18, "max": 20, "label": "高度可执行" },
-                "valuable": { "min": 15, "max": 17, "label": "有价值" },
-                "informative": { "min": 10, "max": 14, "label": "信息丰富" },
-                "limited": { "min": 5, "max": 9, "label": "有限效用" }
-              }
-            },
-            "reportSettings": {
-              "excellentThreshold": 80,
-              "goodThreshold": 60,
-              "includeTimeline": true,
-              "includeProductDetails": true,
-              "includeSources": true,
-              "maxSourcesPerTopic": 5
-            },
-            "webSearch": {
-              "enabled": true,
-              "resultsPerTopic": 5,
-              "delayBetweenRequests": 1000
-            }
-          }
-          EOF
+          mkdir -p skills/ai-news-analyzer/reports
 
       - name: 运行 AI 新闻分析（智谱 GLM-4.7）
         env:
+          TIANAPI_KEY: ${{ secrets.TIANAPI_KEY }}
+          TIANAPI_ENDPOINT: ${{ secrets.TIANAPI_ENDPOINT || 'https://apis.tianapi.com/ai/index' }}
+          MAX_TOPICS: ${{ github.event.inputs.max_topics || '20' }}
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
         run: |
           node .github/scripts/ai-news-analyzer-zhipu.js
 
       - name: 生成 HTML 报告
+        env:
+          TIANAPI_KEY: ${{ secrets.TIANAPI_KEY }}
+          TIANAPI_ENDPOINT: ${{ secrets.TIANAPI_ENDPOINT || 'https://apis.tianapi.com/ai/index' }}
+          MAX_TOPICS: ${{ github.event.inputs.max_topics || '20' }}
         run: |
           node skills/ai-news-analyzer/get-daily-news.js
 

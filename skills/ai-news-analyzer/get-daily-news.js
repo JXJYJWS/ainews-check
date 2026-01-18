@@ -10,9 +10,32 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-// Load configuration
-const configPath = path.join(__dirname, 'api-config.json');
-const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+// Load configuration（优先使用环境变量，否则从配置文件读取）
+let config;
+const TIANAPI_KEY = process.env.TIANAPI_KEY;
+const TIANAPI_ENDPOINT = process.env.TIANAPI_ENDPOINT || 'https://apis.tianapi.com/ai/index';
+const MAX_TOPICS = process.env.MAX_TOPICS || '20';
+
+if (TIANAPI_KEY) {
+  // 从环境变量构建配置
+  config = {
+    apiEndpoint: TIANAPI_ENDPOINT,
+    apiKey: TIANAPI_KEY,
+    apiName: 'TianAPI',
+    apiTimeout: 30000,
+    maxTopics: parseInt(MAX_TOPICS, 10)
+  };
+  console.log('✅ 使用环境变量配置');
+} else {
+  // 从配置文件读取
+  const configPath = path.join(__dirname, 'api-config.json');
+  if (fs.existsSync(configPath)) {
+    config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    console.log('✅ 使用配置文件:', configPath);
+  } else {
+    throw new Error('未找到配置文件且未设置 TIANAPI_KEY 环境变量');
+  }
+}
 
 /**
  * Fetch news from TianAPI
