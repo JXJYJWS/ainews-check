@@ -147,16 +147,12 @@ jobs:
           path: _pages/reports
           merge-multiple: true
 
-      - name: 创建 Pages 目录
-        run: |
-          mkdir -p _pages
-
       - name: 移动报告文件到正确位置
         run: |
-          # 将下载的报告文件移动到 _pages/reports/ 目录
-          find _pages/reports -name "*.html" -type f -exec mv {} _pages/reports/ \; 2>/dev/null || true
-          # 清理可能的子目录
-          find _pages/reports -mindepth 1 -maxdepth 1 -type d ! -name "reports" -exec rm -rf {} + 2>/dev/null || true
+          # 扁平化目录结构：将所有子目录中的HTML文件移动到 _pages/reports/ 根目录
+          find _pages/reports -mindepth 2 -name "*.html" -type f -exec mv -t _pages/reports/ {} +
+          # 删除空的子目录
+          find _pages/reports -mindepth 1 -type d -empty -delete
 
       - name: 创建首页
         run: |
