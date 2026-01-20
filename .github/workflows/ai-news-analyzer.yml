@@ -88,8 +88,9 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          # 使用 -f 强制添加被 .gitignore 忽略的 HTML 报告文件
+          # 使用 -f 强制添加被 .gitignore 忽略的报告文件
           git add -f skills/ai-news-analyzer/reports/*.html
+          git add -f skills/ai-news-analyzer/reports/analyzed-news-*.json
           git diff --staged --quiet || git commit -m "🤖 AI News Report - $(date +'%Y-%m-%d')"
           # 先拉取远程更新并rebase，避免冲突
           git pull --rebase --autostash || true
