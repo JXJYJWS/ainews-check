@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI行业资讯分析报告 - 2026/11/14 15:25:23</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+                         'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .report-date {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #333;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .topic-card {
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-card.excellent {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .topic-card.good {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .topic-card.normal {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .topic-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .score-badge {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-card.excellent .score-badge {
+            background: white;
+            color: #667eea;
+        }
+
+        .topic-card.good .score-badge {
+            background: white;
+            color: #f5576c;
+        }
+
+        .topic-card.normal .score-badge {
+            background: #667eea;
+            color: white;
+        }
+
+        .topic-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .topic-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .section {
+            margin: 25px 0;
+        }
+
+        .section h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topic-card.excellent h3,
+        .topic-card.good h3 {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .topic-card.normal h3 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .timeline {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+        }
+
+        .timeline li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: currentColor;
+            font-weight: bold;
+        }
+
+        .product-details, .analysis {
+            line-height: 1.8;
+        }
+
+        .product-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .topic-card.normal .product-details {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .score-breakdown {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .score-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            opacity: 0.85;
+            margin-bottom: 5px;
+        }
+
+        .score-bar-container {
+            background: rgba(255, 255, 255, 0.2);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .topic-card.normal .score-bar-container {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .score-bar {
+            height: 100%;
+            background: white;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .topic-card.normal .score-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .topic-title {
+                font-size: 1.4em;
+                min-width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .badge-excellent {
+            background: #667eea;
+            color: white;
+        }
+
+        .badge-good {
+            background: #f5576c;
+            color: white;
+        }
+
+        .badge-normal {
+            background: #c3cfe2;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+    <div class="header">
+        <h1>🤖 AI行业资讯分析报告</h1>
+        <p class="report-date">生成时间: 2026/11/14 15:25:23</p>
+    </div>
+        <div class="content">
+            
+    <div class="summary">
+        <h2>📊 报告摘要</h2>
+        <p>本次分析共涵盖 <strong>20</strong> 个AI行业热点话题</p>
+        <div class="summary-stats">
+            <div class="stat-item">
+                <div class="stat-number">20</div>
+                <div class="stat-label">总话题数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">11</div>
+                <div class="stat-label">优秀话题 (>80分)</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">9</div>
+                <div class="stat-label">良好话题 (60-80分)</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">普通话题 (<60分)</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">78.8</div>
+                <div class="stat-label">平均评分</div>
+            </div>
+        </div>
+    </div>
+            <h2 class="section-title">🏆 优秀话题</h2>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">国际中文教育垂直大模型亮相，为全球中文学习者等群体提供智能化服务</div>
+            <div class="score-badge">评分: 88/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-13 17:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (18/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 90%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>国际中文教育垂直大模型研发启动</li><li>模型初步完成，进行内部测试</li><li>模型经过优化，准备对外发布</li><li>模型正式亮相，受到广泛关注</li><li>模型开始在全球范围内推广使用</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                该模型是一款结合人工智能技术与国际中文教育需求的垂直大模型，具备深度学习、自然语言处理等功能，能够专项适配教与学各个环节，提供智能化教学服务。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它标志着国际中文教育领域的技术创新，通过智能化手段提升教学质量和效率，有助于推动全球中文教育的普及和发展。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/801.htm" target="_blank" style="color: inherit;">国际中文教育垂直大模型亮相，为全球中文学习者等群体提供智能化服务</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">Omdia：今年全球 AI 软件收入预计突破 2000 亿美元，较 2024 年翻一番</div>
+            <div class="score-badge">评分: 88/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-12 19:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (18/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 90%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年，Omdia发布报告预测全球AI软件收入将突破2000亿美元</li><li>2026年11月12日，IT家人工智能报道了这一预测</li><li>2026年，企业开始扩大AI助手和编程工具的应用，并在业务软件中加入AI功能</li><li>2026年，生成式AI市场营收预计同比增长139%</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                AI助手、编程工具、各类业务软件中的AI功能，生成式AI市场
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它揭示了AI软件市场的快速增长趋势，以及企业对AI技术的广泛应用。这一预测对于投资者、企业决策者和行业分析师来说都是重要的信息，因为它预示着AI技术将在未来几年内继续推动经济增长。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/259.htm" target="_blank" style="color: inherit;">Omdia：今年全球 AI 软件收入预计突破 2000 亿美元，较 2024 年翻一番</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">本地推理引擎 llama.cpp 1.0.0 史诗级更新：支持超 150 种模型架构，断网也能满血跑大模型</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-14 09:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>Georgi Gerganov宣布开源AI推理项目llama.cpp与底层机器学习引擎ggml的库版本迈入1.0.0</li><li>llama.cpp 1.0.0版本发布，支持超过150种模型架构</li><li>llama.cpp 1.0.0版本实现断网也能运行大模型的功能</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                llama.cpp是一个开源的AI推理项目，其1.0.0版本支持超过150种模型架构，并实现了断网也能运行大模型的功能。底层机器学习引擎ggml也进行了更新。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它标志着AI推理技术的重大进展，支持更多模型架构和断网运行功能将极大地提升AI应用的灵活性和实用性。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/027/019.htm" target="_blank" style="color: inherit;">本地推理引擎 llama.cpp 1.0.0 史诗级更新：支持超 150 种模型架构，断网也能满血跑大模型</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">不用显卡：玩家靠停产傲腾内存跑通 2.8 万亿参数 Kimi K3 AI 模型，每秒输出 1.5 词元</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-13 16:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月2日：网友u/IndividualSurvival在Reddit社区发帖分享实验。</li><li>2026年11月13日：IT家人工智能报道此事件。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                使用已停产的英特尔傲腾持久内存，成功运行2.8万亿参数的月之暗面KimiK3 AI模型，每秒输出1.5词元，无需显卡。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                此事件展示了非传统硬件在AI模型运行中的潜力，对降低AI计算成本和资源需求有重要意义。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/759.htm" target="_blank" style="color: inherit;">不用显卡：玩家靠停产傲腾内存跑通 2.8 万亿参数 Kimi K3 AI 模型，每秒输出 1.5 词元</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">主导苹果 M1 芯片的传奇架构师谈 AI 电力危机：用造 iPhone 芯片的“抠门”哲学建超算</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-13 13:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月13日，彭博社的马克·古尔曼邀请苹果前CPU首席架构师杰拉德·威廉姆斯三世作客PowerOn访谈节目。</li><li>访谈中，杰拉德·威廉姆斯三世探讨了当前的AI浪潮。</li><li>访谈内容涉及用iPhone芯片的“抠门”哲学建造超算的设想。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                杰拉德·威廉姆斯三世在访谈中提到，他计划使用类似iPhone芯片的设计哲学来建造超算，这种哲学强调高效能和成本效益。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它涉及到了AI领域的关键人物和他们的创新思维。杰拉德·威廉姆斯三世的见解可能会对AI硬件的发展产生重大影响，同时也揭示了技术行业如何通过创新来应对电力危机。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/591.htm" target="_blank" style="color: inherit;">主导苹果M1芯片的传奇架构师谈AI电力危机：用造iPhone芯片的“抠门”哲学建超算</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">不靠补贴、不增加他人成本：微软承诺其 AI 扩张电费将自己买单</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-13 12:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>微软宣布AI数据中心供电计划</li><li>微软开始实施供电计划</li><li>微软成功实现供电计划</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                微软计划通过自己的资金建设并运营数据中心，以支持其AI服务的扩张，不依赖政府补贴，也不增加其他电力用户的成本。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它展示了微软在可持续性和成本效益方面的创新。通过自我供电，微软不仅减少了对外部资金的依赖，还可能为其他公司树立了榜样，表明大型技术公司可以在不牺牲环境或增加用户成本的情况下实现可持续发展。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/533.htm" target="_blank" style="color: inherit;">IT家人工智能</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">黄仁勋最激进 AI 赌局的“刹车手”：英伟达临时 CEO 克雷斯曾力主削减 2500 亿美元 OpenAI 豪赌</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-13 10:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月12日，TheInformation发布博文</li><li>2026年11月13日，IT家人工智能报道该新闻</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                无具体产品/技术创新描述，新闻关注的是英伟达的财务策略和管理层决策。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它揭示了英伟达在AI领域的战略决策和管理层之间的分歧，这对于理解公司未来的发展方向和AI行业的发展趋势具有重要意义。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/478.htm" target="_blank" style="color: inherit;">黄仁勋最激进 AI 赌局的“刹车手”：英伟达临时 CEO 克雷斯曾力主削减 2500 亿美元 OpenAI 豪赌</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">超 740 亿美元砸向 AI：马斯克的 SpaceX 不光造火箭，还要建超级算力帝国</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-13 08:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>马斯克宣布SpaceX计划投入超过740亿美元</li><li>在得克萨斯州和亚利桑那州建设超级计算数据中心园区</li><li>标志着SpaceX向AI算力基础设施扩张</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                SpaceX计划建设的超级计算数据中心园区，旨在为人工智能提供强大的算力支持，这将包括高性能计算设施和数据中心。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它揭示了SpaceX在AI领域的重大战略布局，表明了公司对AI技术的重视和投入，同时也预示着AI算力基础设施将成为未来科技竞争的关键领域。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/455.htm" target="_blank" style="color: inherit;">超 740 亿美元砸向 AI：马斯克的 SpaceX 不光造火箭，还要建超级算力帝国</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">谷歌发布 Gemini 4 Hydrogen 模型：主打日常编程与智能体工作流，百万 Token 输入 1.5 美元</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-13 04:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月13日：谷歌发布Gemini 4 Hydrogen模型。</li><li>2026年11月13日：Gemini 4 Hydrogen模型在AIStudio、Gemini应用、谷歌搜索等多端平台同步登陆。</li><li>未来：Gemini 4 Hydrogen模型在编程与智能体工作流场景中的应用和反馈收集。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                Gemini 4 Hydrogen模型是谷歌推出的新AI模型，专注于日常编程和多智能体工作流场景。该模型具有100万Token的上下文窗口，并实现了全100万Token上下文窗口的统一定价。该模型可在AIStudio、Gemini应用、谷歌搜索等多端平台使用。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它标志着谷歌在AI编程和智能体工作流领域的最新进展。Gemini 4 Hydrogen模型的推出，可能会对编程和智能体工作流产生重大影响，并可能推动相关领域的创新和发展。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/446.htm" target="_blank" style="color: inherit;">谷歌发布 Gemini 4 Hydrogen 模型：主打日常编程与智能体工作流，百万 Token 输入 1.5 美元</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">迪拜富豪萨基瓦尼：光是投资 OpenAI、SpaceX 和 Anthropic，我们就赚了几十亿美元</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-12 19:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>迪拜富豪萨基瓦尼宣布投资OpenAI、SpaceX和Anthropic</li><li>萨基瓦尼预计投资AI公司有望带来数十亿美元收益</li><li>报道指出投资者从科技巨头投资中获益丰厚</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                萨基瓦尼投资的公司包括OpenAI、SpaceX和Anthropic，这些公司分别专注于人工智能、太空探索和人工智能研究。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它揭示了科技投资领域的巨大潜力和回报，同时也展示了迪拜富豪对科技行业的深刻理解和前瞻性投资策略。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/286.htm" target="_blank" style="color: inherit;">IT家人工智能</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card excellent">
+        <div class="topic-header">
+            <div class="topic-title">机械臂任务最强 AI 引擎：Praxis-1 完胜 GPT-6 Astra，速度快 15.6 倍、成本降至 1/51</div>
+            <div class="score-badge">评分: 85/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-excellent">优秀</span></span>
+            <span>📅 2026-11-12 17:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (70/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 87.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月11日：Runway宣布推出Praxis-1机器人模型。</li><li>2026年11月12日：IT家人工智能报道Praxis-1的性能和许可证信息。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                Praxis-1是一个机器人模型，利用视频预训练的知识进行真实机器人控制。它比GPT-6 Astra快15.6倍，成本降低至1/51。Praxis-1采用Apache2.0许可证，允许开发者在其硬件上运行和微调。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它展示了AI在机器人控制领域的重大进展，特别是在速度和成本效益方面的突破。Praxis-1的性能提升可能对工业自动化、物流和制造业等领域产生深远影响。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/104.htm" target="_blank" style="color: inherit;">IT家人工智能</a></li>
+            </ul>
+        </div>
+        
+    </div><h2 class="section-title">👍 良好话题</h2>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">实现“躺平式办公”：Mac 版 Perplexity 上线“AI 队友”，组建你的全天候数字员工</div>
+            <div class="score-badge">评分: 75/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-14 11:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (60/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月14日 - Perplexity发布AI智能体功能Teammates的Mac版</li><li>2026年11月14日 - Max订阅用户可在Mac平台上体验Teammates功能</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                Perplexity的Teammates功能是一个AI智能体，旨在帮助用户在Mac平台上实现全天候的数字办公体验。该功能之前已在iOS和网页端提供，现在扩展到桌面办公场景，允许用户邀请AI智能体作为他们的‘队友’，以协助完成各种任务。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它标志着AI在办公自动化领域的进一步发展。通过将AI智能体集成到桌面办公环境中，Perplexity为用户提供了更加便捷和高效的办公方式，这可能会改变未来的工作模式。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/027/050.htm" target="_blank" style="color: inherit;">实现“躺平式办公”：Mac 版 Perplexity 上线“AI 队友”，组建你的全天候数字员工</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">礼来 CEO 回应“AI 十年内攻克癌症”：愿景很美好，但不太可能</div>
+            <div class="score-badge">评分: 75/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-14 10:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (60/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月12日：Anthropic首席执行官达里奥·阿莫代伊预测AI将在不到十年内攻克癌症等疾病。</li><li>2026年11月14日：礼来董事长兼首席执行官戴夫·里克斯回应该预测，认为实现可能性不大。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                无具体产品/技术创新描述。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                该话题重要，因为它涉及AI在医疗领域的应用前景，以及行业领袖对AI技术潜力的不同看法。这反映了AI技术在医疗健康领域的争议和期待。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/027/037.htm" target="_blank" style="color: inherit;">礼来 CEO 回应“AI 十年内攻克癌症”：愿景很美好，但不太可能</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">韩国拟采购无线电探测设备，防范国家资格考试“AI 作弊”</div>
+            <div class="score-badge">评分: 75/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-13 23:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (60/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年10月：韩国国家资格考试中查获首起智能眼镜作弊案件</li><li>2026年11月：韩国政府考虑采购无线电探测设备以防范AI作弊</li><li>2026年11月13日：IT家人工智能报道韩国政府采购无线电探测设备计划</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                无线电探测设备，用于检测无线电信号，以识别和防范使用智能眼镜等设备进行作弊的行为。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它揭示了AI技术在考试作弊中的潜在威胁，以及各国政府为防范此类作弊行为所采取的措施。无线电探测设备的采购表明了技术对抗作弊的进步，同时也反映了教育领域对诚信和公平性的重视。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/958.htm" target="_blank" style="color: inherit;">韩国拟采购无线电探测设备，防范国家资格考试“AI 作弊”</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">BBC 曝光英国“房源照骗”现象：有中介、卖家开始用 AI 伪造或美化房屋</div>
+            <div class="score-badge">评分: 75/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-13 19:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (60/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月13日，BBC曝光英国‘房源照骗’现象。</li><li>2026年11月，IT家人工智能报道该现象。</li><li>未来，预计更多地区和行业将面临类似问题。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                AI技术被用于伪造或美化房源照片，包括照片编辑和图像生成技术。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它揭示了AI技术在房地产领域的潜在滥用，以及其对消费者信任和行业规范的挑战。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/904.htm" target="_blank" style="color: inherit;">BBC 曝光英国“房源照骗”现象：有中介、卖家开始用 AI 伪造或美化房屋</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">AI 接管手机迈出关键一步：谷歌 Gemini 自动化应用名单曝光，当前共计 134 款</div>
+            <div class="score-badge">评分: 75/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-13 16:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (60/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (15/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月12日，AndroidAuthority发布博文曝光谷歌Gemini任务自动化功能适配应用清单。</li><li>2026年11月13日，IT家人工智能报道了这一新闻，并提供了详细的应用列表和场景覆盖信息。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                谷歌的Gemini任务自动化功能支持应用清单曝光，共计134款App，覆盖外卖、打车、购物、旅行及办公等场景。这些应用包括但不限于外卖、打车、购物、旅行及办公等，但目前这些应用并未全部开放自动操作功能。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它揭示了谷歌在AI自动化领域的最新进展。Gemini功能的曝光表明谷歌正在推动AI在手机应用自动化方面的应用，这可能对用户日常生活的便捷性产生重大影响。同时，这也反映了AI技术在智能手机领域的广泛应用趋势。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/752.htm" target="_blank" style="color: inherit;">AI 接管手机迈出关键一步：谷歌 Gemini 自动化应用名单曝光，当前共计 134 款</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">微软 14 年 AI 老将离职：称创新难落地，降本研究未获认真考虑</div>
+            <div class="score-badge">评分: 70/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-14 14:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (60/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (10/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 50%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月14日，微软AI科学家John Langford宣布离职。</li><li>John Langford在微软任职超过14年，是AIFrontiers实验室联合创始人。</li><li>John Langford表示离职原因是研究成果难以落地，创新想法未获认真考虑。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                无具体产品/技术创新细节。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它揭示了在大型科技公司内部，研究成果转化为实际产品或服务的挑战。John Langford的离职可能反映了行业内部对AI研究与应用之间差距的担忧，这对于理解AI行业的发展趋势和潜在问题具有重要意义。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/027/078.htm" target="_blank" style="color: inherit;">微软 14 年 AI 老将离职：称创新难落地，降本研究未获认真考虑</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">上海警方通报“和平饭店 51 万元天价账单”系 AI 生成：实为酒类销售公司营销自家产品，15 名涉案人员被抓</div>
+            <div class="score-badge">评分: 70/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-13 17:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (60/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 75%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (10/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 50%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月13日，上海警方通报和平饭店51万元天价账单事件。</li><li>警方调查发现，该账单系AI生成，用于酒类销售公司营销。</li><li>15名涉案人员被抓，其中4人被采取刑事强制措施。</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                该事件涉及的产品/技术为AI生成账单和视频，用于营销。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                该事件揭示了AI技术在营销领域的滥用，同时也展示了AI技术在制造虚假信息方面的潜在风险。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/764.htm" target="_blank" style="color: inherit;">上海警方通报“和平饭店51万元天价账单”系AI生成：实为酒类销售公司营销自家产品，15名涉案人员被抓</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">黄仁勋辞职后，英伟达总部外出现鲜花和蜡烛</div>
+            <div class="score-badge">评分: 60/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-13 11:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (50/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 62.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (10/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 50%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>黄仁勋辞职</li><li>英伟达总部外出现鲜花和蜡烛</li><li>科技媒体BusinessInsider报道</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                科技媒体BusinessInsider昨日（11月12日）发布博文，报道称在美国加州圣克拉拉的英伟达总部外，有人于公司标志前摆放多束鲜花，并放置了一支装在玻璃罐中的白色蜡烛，被外界视为致敬黄仁勋这位AI时代标志性人物。
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题虽然有趣，但与具体的产品或技术创新无关。它更多地关注于英伟达公司高层人事变动及其对公众的影响，反映了行业对黄仁勋这位AI时代标志性人物的尊敬。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/492.htm" target="_blank" style="color: inherit;">黄仁勋辞职后，英伟达总部外出现鲜花和蜡烛</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="topic-card good">
+        <div class="topic-header">
+            <div class="topic-title">澳洲航空宣布裁员 850 人，工会质疑其借 AI 之名削减本土岗位</div>
+            <div class="score-badge">评分: 60/100</div>
+        </div>
+
+        <div class="topic-meta">
+            <span><span class="badge badge-good">良好</span></span>
+            <span>📅 2026-11-12 17:00</span>
+            <span>🔗 IT家人工智能</span>
+        </div>
+
+        
+    <div class="score-breakdown">
+        <div class="score-item">
+            <div class="score-label">有趣度 (50/80)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 62.5%"></div>
+            </div>
+        </div>
+        <div class="score-item">
+            <div class="score-label">有用度 (10/20)</div>
+            <div class="score-bar-container">
+                <div class="score-bar" style="width: 50%"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h3>📈 事件脉络</h3>
+            <ul class="timeline">
+                <li>2026年11月12日，澳洲航空宣布裁员850人</li><li>工会质疑裁员原因与AI有关</li><li>工会认为企业转而雇用海外员工</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>💡 产品创意详情</h3>
+            <div class="product-details">
+                无具体产品/技术创新
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎯 综合分析</h3>
+            <div class="analysis">
+                这个话题重要，因为它涉及到AI在劳动力市场中的应用和影响，以及企业如何使用AI技术进行成本优化。它揭示了AI技术可能带来的社会和就业问题。
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h3>🔗 相关链接</h3>
+            <ul class="timeline">
+                <li><a href="https://www.ithome.com/1/026/157.htm" target="_blank" style="color: inherit;">IT家人工智能</a></li>
+            </ul>
+        </div>
+        
+    </div>
+        </div>
+        
+    <div class="footer">
+        <p>本报告由 AI News Analyzer 自动生成 | 数据来源: 多个AI行业权威媒体</p>
+        <p>🤖 Generated with <a href="https://claude.com/claude-code" target="_blank">Claude Code</a></p>
+    </div>
+    </div>
+</body>
+</html>
